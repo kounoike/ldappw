@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}LDAPパスワード変更(管理者用){% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-offset-5 col-md-3 well">
+        {% if err %}
+        <div class="col-md-offset-2 col-md-8 alert alert-danger" role="alert">
+            {{err}}
+        </div>
+        {% endif %}
+        {% if success %}
+        <div class="col-md-offset-2 col-md-8 alert alert-success">
+            {{ success }}
+        </div>
+        {% endif %}
+        <form method="POST" action="" id="userAdd" data-toggle="validator">
+            <legend>LDAP ユーザ追加</legend>
+            <fieldset>
+            <div class="form-group">
+                <label for="inputAdminpassword" class="control-label">管理者パスワード</label>
+                <input type="password" name="adminpassword" class="form-control" id="inputAdminpassword" placeholder="管理者パスワード" required/>
+            </div>
+            <div class="form-group">
+                <label for="inputUsername" class="control-label">ユーザ名</label>
+                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="ユーザ名" required/>
+            </div>
+            <div class="form-group">
+                <label for="inputSn" class="control-label">苗字</label>
+                <input type="text" name="sn" class="form-control" id="inputSn" placeholder="苗字" required />
+            </div>
+            <div class="form-group">
+                <label for="inputGivenName" class="control-label">名前</label>
+                <input type="text" name="givenName" class="form-control" id="inputGivenName" placeholder="名前" required />
+            </div>
+            <div class="form-group">
+                <label for="inputEmail" class="control-label">Email</label>
+                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email" required type="email" />
+            </div>
+            <div class="form-group">
+                <label for="inputNewpassword1" class="control-label">パスワード(6文字以上)</label>
+                <input type="password" name="newpassword1" class="form-control" id="inputNewpassword1" placeholder="新パスワード" data-minlength="6" required/>
+            </div>
+            <div class="form-group">
+                <label for="inputNewpassword2" class="control-label">確認</label>
+                <input type="password" name="newpassword2" class="form-control" id="inputNewpassword2" placeholder="確認" data-match="#inputNewpassword1" data-match-error="パスワードが一致しません" required/>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">変更</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<script>
+jQuery(function($) {
+    H5F.setup($('form[data-toggle="validator"]'));
+});
+</script>
+{% endblock %}
